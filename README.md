@@ -11,11 +11,11 @@ A simple CLI script to find all scores from a user on all ranked maps between tw
 
 Clone the repository and run `npm i` in the project root.
 
+Paste your osu! Api Key in `api_key.json`.
+
 ## Usage
 
 Run the program using `node ./index.js` in the project root.
-
-Paste your osu! Api Key in `api_key.json`!
 
 The program will ask you for what it needs:
 * GameMode (0 = STD, 1 = Taiko, 2 = CTB, 3 = Mania)
