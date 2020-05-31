@@ -4,13 +4,15 @@ A simple CLI script to find all scores from a user on all ranked maps between tw
 
 ## Requirements
 
-Node.js (Made in v12, so only this is supported).
-A valid [osu! api key](https://osu.ppy.sh/p/api).
+* Node.js (Made in v12, so only this is supported).
+* A valid [osu! api key](https://osu.ppy.sh/p/api).
 
 ## Installation
+
 Clone the repository and run `npm i` in the project root.
 
 ## Usage
+
 Run the program using `node ./index.js` in the project root.
 
 The program will ask you for what it needs:
