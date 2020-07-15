@@ -23,11 +23,11 @@ async function wrapper() {
 
         let current_date = start_date;
 
-        await maps_get()
+        let userdata = await axios.get(`https://osu.ppy.sh/api/get_user?k=${config.osu_key}&u=${user_id}&m=${mode}&type=id`);
+
+        await maps_get();
 
         async function maps_get() {
-
-
 
             axios.get(`https://osu.ppy.sh/api/get_beatmaps?k=${config.osu_key}&m=${mode}&a=${include_converts}&since=${current_date}`).then(async res => {
 
@@ -89,7 +89,7 @@ async function wrapper() {
                     var json = JSON.parse(data)
 
                     if (res.data[0] == null) {
-                        res.data = [{ "404": "Not Found" }]
+                        res.data = [{"score_id":"0","score":"0","username": userdata.data[0].username,"maxcombo":"0","count50":"0","count100":"0","count300":"0","countmiss":"0","countkatu":"0","countgeki":"0","perfect":"0","enabled_mods":"0","user_id": user_id,"date":"0","rank":"0","pp":"0","replay_available":"0"}]
                         res.data[0].beatmap_id = maps.maps[i - 1].beatmap_id
                         console.log(`Did not find a score on Beatmap: ${maps.maps[i - 1].beatmap_id} - ${maps.maps[i - 1].title} | ${maps.maps[i - 1].version}!`)
                         await json.scores.push(res.data[0])
