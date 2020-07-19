@@ -1,3 +1,5 @@
+# Rewriting.
+
 # osu! Score Finder
 
 A simple CLI script to find all scores from a user on all ranked maps between two dates.
