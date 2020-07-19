@@ -3,4 +3,4 @@ maps.json
 node_modules
 package-lock.json
 logs.txt
-api_key_dev.json
+api_key.json
