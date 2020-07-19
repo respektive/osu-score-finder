@@ -1,5 +1,5 @@
 {
     "logtofile": true,
-    "loglevel": 4,
+    "loglevel": 3,
     "version": "2.0-Alpha"
 }
