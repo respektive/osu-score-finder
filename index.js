@@ -6,7 +6,7 @@ const prompt = require('prompt');
 // File Links
 const module_index = require('./module_index.js');
 const config = require('./config.json');
-const api_key = require('./api_key_dev.json');
+const api_key = require('./api_key.json');
 
 //File Reset
 fs.writeFile("logs.txt", "", function (err) {
