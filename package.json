@@ -1,13 +1,11 @@
 {
-  "name": "haha-yes",
+  "name": "map_request",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "getmaps.js",
   "dependencies": {
-    "axios": "^0.19.2",
-    "fs": "0.0.1-security",
-    "prompt": "^1.0.0",
-    "util": "^0.12.3"
+    "axios": "^0.21.1",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {},
   "scripts": {
