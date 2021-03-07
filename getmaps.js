@@ -4,11 +4,12 @@ const config = require('./config.json');
 
 let maps = { "data": [] };
 let map_data = null;
+let clear = 0;
 
 async function main() {
 
     try {
-        while (map_data == null || map_data.data.length != 0) {
+        while (map_data == null || map_data.data.length != 0 && clear == 0) {
             console.log(`Requested ${maps.data.length} Maps so far!`)
             async function run() {
                 map_data = await axios
@@ -20,7 +21,11 @@ async function main() {
                     });
 
                 map_data.data.forEach(map => {
-                    maps.data.push(map);
+                    if(new Date(map.approved_date) > new Date(config.final_date)){
+                        clear = 1;
+                    } else {
+                        maps.data.push(map);
+                    }
                 })
 
                 config.last_map = maps.data[maps.data.length - 1].approved_date;
