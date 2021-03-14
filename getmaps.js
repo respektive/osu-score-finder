@@ -14,14 +14,14 @@ async function main() {
             async function run() {
                 map_data = await axios
                     .get(
-                        `https://osu.ppy.sh/api/get_beatmaps?k=${config.apikey}&since=${config.last_map}&m=0&a=0`
+                        `https://osu.ppy.sh/api/get_beatmaps?k=${config.apikey}&since=${config.last_map}&m=${config.mode}&a=0`
                     )
                     .catch((err) => {
                         console.log(err);
                     });
 
                 map_data.data.forEach(map => {
-                    if(new Date(map.approved_date) > new Date(config.final_date)){
+                    if (new Date(map.approved_date) > new Date(config.final_date)) {
                         clear = 1;
                     } else {
                         maps.data.push(map);
