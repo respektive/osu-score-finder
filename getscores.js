@@ -8,16 +8,21 @@ let scoredata = {}
 
 async function main() {
     try {
-        await maps.data.forEach(function (map, i) {
-            setTimeout(async function () {
-                try {
-                    score_data = await axios
-                        .get(
-                            `https://osu.ppy.sh/api/get_scores?k=${config.apikey}&m=0&b=${map.beatmap_id}&u=${config.user}&limit=1`
-                        )
-                } catch (err) {
-                    console.log(err)
-                } finally {
+        await maps.data.forEach(async function (map, i) {
+            async function retry() {
+                setTimeout(async function () {
+                    try {
+                        score_data = await axios
+                            .get(
+                                `https://osu.ppy.sh/api/get_scores?k=${config.apikey}&m=0&b=${map.beatmap_id}&u=${config.userid}&limit=1`
+                            )
+                    } catch (err) {
+                        console.log(`Failed... Code: ${err.response.status}`);
+                        console.log("Failed Fetch, retrying...");
+                        setTimeout(await retry, 5000);
+                        return;
+                    }
+
                     if (score_data.data[0] != undefined) {
                         console.log(`Processed ${scores.data.length + 1} out of ${maps.data.length} maps! Last Rank: ${score_data.data[0].rank}`);
                         scoredata['map'] = map
@@ -26,11 +31,11 @@ async function main() {
                         scoredata = {}
                     } else {
                         console.log(`Processed ${scores.data.length + 1} out of ${maps.data.length} maps! Last map did not have a score.`);
-                        scoredata['map'] = map 
+                        scoredata['map'] = map
                         scoredata['score'] = {
                             "score_id": "0",
                             "score": "0",
-                            "username": "Emilia-tan",
+                            "username": config.username,
                             "maxcombo": "0",
                             "count50": "0",
                             "count100": "0",
@@ -40,7 +45,7 @@ async function main() {
                             "countgeki": "0",
                             "perfect": "0",
                             "enabled_mods": "0",
-                            "user_id": "7511840",
+                            "user_id": config.userid,
                             "date": "0",
                             "rank": "0",
                             "pp": "0",
@@ -61,8 +66,11 @@ async function main() {
                             console.log("Finished! DO NOT, UNDER NO CIRCUMSTANCE, OPEN IT IN A WEAK TEXT EDITOR. THIS THING IS FUCKING MASSIVE.");
                         }
                     }
-                }
-            }, i * 500);
+
+                }, i * 0);
+
+            };
+            await retry();
         });
     } catch (e) {
         console.log(e);
