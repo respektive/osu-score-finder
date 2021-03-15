@@ -68,7 +68,7 @@ async function main() {
                             }
                         }
                     }
-                }, i * 100);
+                }, i * 500);
             };
             await retry();
         });
