@@ -5,6 +5,7 @@ const maps = require('./maps.json');
 
 let scores = { "data": [] };
 let scoredata = {}
+let ctr = 0;
 
 async function main() {
     try {
@@ -54,26 +55,25 @@ async function main() {
                         scores.data.push(scoredata);
                         scoredata = {}
 
-                    }
+                        ctr++
 
-                    if (scores.data.length == maps.data.length) {
-                        try {
-                            console.log("Now writing to file, this might take a while...");
-                            fs.writeFile("scores.json", JSON.stringify(scores), (err) => { console.log(err) });
-                        } catch (e) {
-                            console.log(e);
-                        } finally {
-                            console.log("Finished! DO NOT, UNDER NO CIRCUMSTANCE, OPEN IT IN A WEAK TEXT EDITOR. THIS THING IS FUCKING MASSIVE.");
+                        if (ctr == maps.data.length) {
+                            try {
+                                console.log("Now writing to file, this might take a while...");
+                                fs.writeFile("scores.json", JSON.stringify(scores), (err) => { console.log(err) });
+                            } catch (e) {
+                                console.log(e);
+                            } finally {
+                                console.log("Finished! DO NOT, UNDER NO CIRCUMSTANCE, OPEN IT IN A WEAK TEXT EDITOR. THIS THING IS FUCKING MASSIVE.");
+                            }
                         }
                     }
-
-                }, i * 500);
-
+                }, i * 100);
             };
             await retry();
         });
     } catch (e) {
         console.log(e);
-    }
+    };
 };
 main();
