@@ -54,8 +54,8 @@ async function main() {
                         }
                         scores.data.push(scoredata);
                         scoredata = {}
-
-                        ctr++
+                    }
+                    ctr++
 
                         if (ctr == maps.data.length) {
                             try {
@@ -67,7 +67,6 @@ async function main() {
                                 console.log("Finished! DO NOT, UNDER NO CIRCUMSTANCE, OPEN IT IN A WEAK TEXT EDITOR. THIS THING IS FUCKING MASSIVE.");
                             }
                         }
-                    }
                 }, i * 500);
             };
             await retry();
